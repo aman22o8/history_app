@@ -1,0 +1,46 @@
+.main_container {
+  background-color: #ffffff;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style-type: none;
+  margin-left: 0px;
+
+  padding-right: 20px;
+}
+.first_container {
+  display: flex;
+  align-items: center;
+  margin-left: 0px;
+  /* margin-right: 100px; */
+}
+.time {
+  font-size: 18px;
+  font-weight: 500;
+  font-style: 'roboto';
+  color: #64748b;
+  padding-right: 20px;
+}
+.image {
+  height: 35px;
+  width: 60px;
+  padding-right: 20px;
+  padding-left: 10px;
+}
+.main_heading {
+  font-size: 18px;
+  font-weight: 500;
+  font-style: 'roboto';
+  color: #475569;
+  padding-right: 10px;
+}
+.domain {
+  font-size: 18px;
+  font-weight: 400;
+  font-style: 'roboto';
+  color: #a39c9c;
+}
+.delete {
+  cursor: pointer;
+}
