@@ -1,5 +1,6 @@
+import {Component} from 'react'
+import HistoryItem from './component/HistoryItem'
 import './App.css'
-import SearchHistory from './component/SearchHistory'
 
 // These are the list used in the application. You can move them to any component needed.
 const initialHistoryList = [
@@ -78,6 +79,76 @@ const initialHistoryList = [
 ]
 
 // Replace your code here
-const App = () => <SearchHistory historylist={initialHistoryList} />
+// const App = () => <SearchHistory historylist={initialHistoryList} />
+
+class App extends Component {
+  state = {searchInput: '', userList: initialHistoryList}
+
+  onChangeSearchInput = event => {
+    this.setState({
+      searchInput: event.target.value,
+    })
+  }
+
+  deleteUser = id => {
+    const {userList} = this.state
+    const filteredUsersData = userList.filter(each => each.id !== id)
+    this.setState({
+      userList: filteredUsersData,
+    })
+    console.log(filteredUsersData)
+  }
+
+  render() {
+    const {searchInput, userList} = this.state
+    // const {historylist} = this.props
+    const searchResults = userList.filter(eachUser =>
+      eachUser.title.toLowerCase().includes(searchInput.toLowerCase()),
+    )
+    // console.log(filteredUsersData)
+    console.log(searchResults.length)
+
+    return (
+      <div className="container_main">
+        <div className="header">
+          <img
+            className="history"
+            src="https://assets.ccbp.in/frontend/react-js/history-website-logo-img.png"
+            alt="app logo"
+          />
+          <button className="button" type="button">
+            <img
+              className="search"
+              src="https://assets.ccbp.in/frontend/react-js/search-img.png"
+              alt="search"
+            />
+          </button>
+          <input
+            placeholder="Search History"
+            type="search"
+            className="search_box"
+            onChange={this.onChangeSearchInput}
+            value={searchInput}
+          />
+        </div>
+        <div className="footer">
+          {searchResults.length !== 0 ? (
+            <ul className="list_container">
+              {searchResults.map(eachhistory => (
+                <HistoryItem
+                  historyDetail={eachhistory}
+                  key={eachhistory.id}
+                  deleteUser={this.deleteUser}
+                />
+              ))}
+            </ul>
+          ) : (
+            <p className="noitems">There is no history to show</p>
+          )}
+        </div>
+      </div>
+    )
+  }
+}
 
 export default App
